@@ -1,22 +1,27 @@
-import pyaudio
+#import pyaudio
 import os
-import time
+#import time
 from gtts import gTTS
 import playsound
 import speech_recognition as sr
-import sounddevice
+#import sounddevice
 import random
 import sys
-import smtplib
+#import smtplib
 import webbrowser
 from selenium import webdriver
 import subprocess
+from covid import Covid
+import regex as re
+
 
 
 
 chrome_path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
 webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
 url = "https://www.{}.com"
+
+covid = Covid(source="worldometers")
 
 
 
@@ -55,7 +60,7 @@ def assistant(command):
 		sys.exit()
 
 	#if "google" in command:
-	if command in ["browse the net","browse the internet"]:
+	elif command in ["browse the net","browse the internet"]:
 		talk_to_me("What should i search for?")
 
 		
@@ -88,7 +93,7 @@ def assistant(command):
 		
 			talk_to_me(f"command recieved:{command}")
 		
-	if command in ["open a program" , "execute a program"]:
+	elif command in ["open a program" , "execute a program"]:
 		talk_to_me("Which one?")
 		command = get_audio()
 		if command == "notepad":
@@ -99,7 +104,7 @@ def assistant(command):
 			subprocess.Popen("C:\\Program Files\\Sublime Text 3\\sublime_text.exe")
 		
 
-	if "make a note" in command:
+	elif "make a note" in command:
 		talk_to_me("PLease give a suitable filename")
 		command = get_audio()
 		f_txt = command+".txt"
@@ -114,7 +119,21 @@ def assistant(command):
 			x.kill()
 
 
+	elif re.search(".*active.*",command):
+		x = covid.get_total_active_cases()
+		talk_to_me(f"The  number of active covid-19 cases  are {x} ")
 
+	elif re.search(".*confirmed.*",command):
+		x = covid.get_total_confirmed_cases()
+		talk_to_me(f"The  number of confirmed covid-19 cases are {x} ")	
+
+	elif re.search(".*recovered|recoveries.*",command):
+		x = covid.get_total_recovered()
+		talk_to_me(f"The  number of recovered covid-19 cases  are {x} ")
+
+	elif re.search(".*deaths.*",command):
+		x = covid.get_total_deaths()
+		talk_to_me(f"The  number of deaths due to  covid-19 are {x} ")
 
 		
 
