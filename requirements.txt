@@ -1,0 +1,12 @@
+import os
+import time
+import playsound       #pip install playsound
+import speech_recognition as sr   #pip install speech_recognition
+from gtts import gTTS     #pip install gTTS
+import pyaudio        #pip install pyaudio
+import datetime   
+import webbrowser    #pip install webbrowser
+import wikipedia     #pip install wikipedia
+import requests	     #pip install requests
+import pyjokes       #pip install pyjokes
+import wikiquotes    #pip install wikiquotes
