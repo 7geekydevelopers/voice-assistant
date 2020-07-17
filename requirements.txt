@@ -10,3 +10,4 @@ import wikipedia     #pip install wikipedia
 import requests	     #pip install requests
 import pyjokes       #pip install pyjokes
 import wikiquotes    #pip install wikiquotes
+from countryinfo import CountryInfo    #pip install CountryInfo
