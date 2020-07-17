@@ -79,6 +79,18 @@ while True:
             name=CountryInfo(query[1])
             speak(name.capital())
             
+            
+            
+        elif "covid" in query:
+            name=Covid()
+            a=str(name.get_total_active_cases())
+            b=str(name.get_total_confirmed_cases())
+            c=str(name.get_total_recovered())
+            d=str(name.get_total_deaths())
+            speak("The active cases are {}. The total confirmed cases are {}. The total recovered patients are {}. The total number of deaths are {}".format(a,b,c,d))
+                
+            
+            
                     
         elif 'bye' in query:
             speak('see you later sir.Have a nice day')
