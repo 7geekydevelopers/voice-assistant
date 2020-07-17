@@ -73,6 +73,12 @@ while True:
             
         elif 'news' in query:
             webbrowser.open("https://news.google.com/topstories?hl=en-IN&gl=IN&ceid=IN:en")
+            
+        elif "country" in query:
+            query=query.split(" ")
+            name=CountryInfo(query[1])
+            speak(name.capital())
+            
                     
         elif 'bye' in query:
             speak('see you later sir.Have a nice day')
