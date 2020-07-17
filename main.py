@@ -19,6 +19,8 @@ webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
 url = "https://www.{}.com"
 
 
+
+
 def talk_to_me(text):
 
 	r1 = random.randint(1,10000000)
@@ -86,12 +88,42 @@ def assistant(command):
 		
 			talk_to_me(f"command recieved:{command}")
 		
+	if command in ["open a program" , "execute a program"]:
+		talk_to_me("Which one?")
+		command = get_audio()
+		if command == "notepad":
+			subprocess.Popen("C:Windows\\system32\\notepad.exe")
+		if command == "calculator":
+			subprocess.Popen("C:Windows\\system32\\calc.exe")	
+		if command == "sublime text":
+			subprocess.Popen("C:\\Program Files\\Sublime Text 3\\sublime_text.exe")
+		
 
-	if command == "notepad":
-		talk_to_me("hi")
-		subprocess.Popen("C:Windows\\system32\\notepad.exe")
+	if "make a note" in command:
+		talk_to_me("PLease give a suitable filename")
+		command = get_audio()
+		f_txt = command+".txt"
+		talk_to_me("What should I write in it?")
+		command = get_audio()
+		with open(f_txt,"w") as obj:
+			obj.write(command)
+		talk_to_me("please check if it's  correct.")
+		x = subprocess.Popen(["C:Windows\\system32\\notepad.exe",f_txt])
+		command = get_audio()
+		if "yes" in command:
+			x.kill()
 
-				
+
+
+
+		
+
+	
+
+talk_to_me("I am Ready")
+
+while(True):
+	assistant(get_audio())
 
 			
 
@@ -108,8 +140,5 @@ def assistant(command):
 
 
 
-talk_to_me("I am Ready")
 
-while(True):
-	assistant(get_audio())
 
