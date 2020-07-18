@@ -41,6 +41,7 @@ def talk_to_me(text):
 def get_audio():
 	r = sr.Recognizer()
 	r.energy_threshold = 2200
+	r.dynamic_energy_threshold = True
 	with sr.Microphone() as source:
 		audio = r.listen(source)
 		said = ""
