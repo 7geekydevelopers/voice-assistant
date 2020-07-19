@@ -1,18 +1,15 @@
-#import pyaudio
 import os
-#import time
 from gtts import gTTS
 import playsound
 import speech_recognition as sr
-#import sounddevice
 import random
 import sys
-#import smtplib
 import webbrowser
 from selenium import webdriver
 import subprocess
 from covid import Covid
 import regex as re
+
 
 
 
@@ -41,13 +38,12 @@ def talk_to_me(text):
 def get_audio():
 	r = sr.Recognizer()
 	r.energy_threshold = 2200
-	r.dynamic_energy_threshold = True
 	with sr.Microphone() as source:
 		audio = r.listen(source)
 		said = ""
 
 		try:
-			said = r.recognize_google(audio)
+			said = r.recognize_google(audio , language = "en-in")
 			print(said)
 		except Exception as e:
 			print("Exception" + str(e))
@@ -56,56 +52,24 @@ def get_audio():
 			
 
 def assistant(command):
-	if command in ["stop","terminate"]:
+	if re.search(".*terminate|stop|bye|see you later|rest|deactivate.*",command):
 		talk_to_me("Ok")
 		sys.exit()
 
-	#if "google" in command:
-	elif command in ["browse the net","browse the internet"]:
-		talk_to_me("What should i search for?")
-
-		
-		command = get_audio()
-		while(True):
-			if(command in ["backup","back up"]):
-				talk_to_me("ok")
-				break
-			elif len(command) == 1:
-				
-				webbrowser.get("chrome").open(url.format(command))
-
-			
-
-
-			else:
-				#webbrowser.get("chrome").open(command)
-				if "new tab" in command:
-					talk_to_me("ok")
-					body = driver.findElement(By.cssSelector("body"))
-					body.send_keys(Keys.CONTROL + 't')
-				else:	
-					talk_to_me(f"command recieved:{command}")
-					driver = webdriver.Chrome()
-					driver.get("https://www.google.com/search?q="+ command)
-					
-
-			talk_to_me("Ready for your next command")
-			command = get_audio()		
-		
-			talk_to_me(f"command recieved:{command}")
-		
-	elif command in ["open a program" , "execute a program"]:
-		talk_to_me("Which one?")
-		command = get_audio()
-		if command == "notepad":
-			subprocess.Popen("C:Windows\\system32\\notepad.exe")
-		if command == "calculator":
-			subprocess.Popen("C:Windows\\system32\\calc.exe")	
-		if command == "sublime text":
-			subprocess.Popen("C:\\Program Files\\Sublime Text 3\\sublime_text.exe")
+	elif("open website" in command):
+		command = command.split(" ")
+		webbrowser.get("chrome").open(url.format(command[2]))
 		
 
-	elif "make a note" in command:
+	elif re.search(".*notepad.*",command):
+		subprocess.Popen("C:Windows\\system32\\notepad.exe")
+	elif re.search(".*calculator.*",command):
+		subprocess.Popen("C:Windows\\system32\\calc.exe")	
+	elif re.search(".*sublimetext.*",command):
+		subprocess.Popen("C:\\Program Files\\Sublime Text 3\\sublime_text.exe")
+		
+
+	elif re.search(".*note.*",command):
 		talk_to_me("PLease give a suitable filename")
 		command = get_audio()
 		f_txt = command+".txt"
@@ -116,8 +80,11 @@ def assistant(command):
 		talk_to_me("please check if it's  correct.")
 		x = subprocess.Popen(["C:Windows\\system32\\notepad.exe",f_txt])
 		command = get_audio()
-		if "yes" in command:
+		if re.search(".*yes|yep.*",command):
 			x.kill()
+		elif re.search(".*no|not|wrong.*",command):
+			talk_to_me("Please make the necessary changes in it")
+
 
 
 	elif re.search(".*active.*",command):
@@ -136,6 +103,10 @@ def assistant(command):
 		x = covid.get_total_deaths()
 		talk_to_me(f"The  number of deaths due to  covid-19 are {x} ")
 
+	else:	
+				driver = webdriver.Chrome()
+				driver.get("https://www.google.com/search?q="+ command)	
+
 		
 
 	
@@ -146,15 +117,6 @@ while(True):
 	assistant(get_audio())
 
 			
-
-
-
-		
-
-
-
-
-
 
 
 
