@@ -12,3 +12,4 @@ import pyjokes       #pip install pyjokes
 import wikiquotes    #pip install wikiquotes
 from countryinfo import CountryInfo    #pip install CountryInfo
 from covid import Covid      #pip install covid
+import regex
