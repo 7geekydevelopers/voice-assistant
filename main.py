@@ -9,9 +9,11 @@ from selenium import webdriver
 import subprocess
 from covid import Covid
 import regex as re
-
-
-
+import time
+import wikipedia
+import datetime 
+import pyjokes
+import wikiquotes
 
 
 chrome_path = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
@@ -56,9 +58,53 @@ def assistant(command):
 		talk_to_me("Ok")
 		sys.exit()
 
+	elif 'the time' in command:
+	        strTime = datetime.datetime.now().strftime("%H:%M:%S")    
+	        talk_to_me(f"The time is {strTime}")
+
+
+	#elif 'wikipedia' in command:                                    #12345678
+	elif re.search("tell me about|i want to know about",command):        
+	        #command = command.replace("wikipedia", "")
+	        #command = command.split(" ")[-1]
+	        print("inside")
+	        command = re.findall("tell me about|i want to know about ([a-zA-Z0-9])",command)
+	        #print(command)
+	        if len(command) > 1:
+	        	command = " ".join(command)
+	        #	print(command)
+	        results = wikipedia.summary(command, sentences=2)
+	        talk_to_me("According to Wikipedia" + results)
+	        #print(results)
+	        #talk_to_me(results)
+	      
+	elif 'joke' in command:
+	        talk_to_me(pyjokes.get_joke())
+	        
+	        
+	elif "where is" in command:                                  #12345678
+	    command=command.replace("where is","")
+	    location = command
+	    talk_to_me("User asked to Locate"+location)
+
+	    webbrowser.open("https://www.google.nl/maps/place/" + location + "")
+	    
+	    
+	    
+	elif 'wiki' in command:
+	    talk_to_me(wikiquotes.random_quote("gandhi", "english"))
+	    
+	elif 'news' in command:
+	    webbrowser.open("https://news.google.com/topstories?hl=en-IN&gl=IN&ceid=IN:en")
+	    
+	elif "country" in command:
+	    command=command.split(" ")
+	    name=CountryInfo(command[1])
+	    talk_to_me(name.capital())                	
+
 	elif("open website" in command):
 		command = command.split(" ")
-		webbrowser.get("chrome").open(url.format(command[2]))
+		webbrowser.open(url.format(command[2]))
 		
 
 	elif re.search(".*notepad.*",command):
@@ -87,22 +133,24 @@ def assistant(command):
 
 
 
-	elif re.search(".*active.*",command):
-		x = covid.get_total_active_cases()
-		talk_to_me(f"The  number of active covid-19 cases  are {x} ")
+	elif re.search(".*active|recovered|deaths|confirmed.*",command):
+		type_c = re.findall(".*(active|recovered|deaths|confirmed).*",command)
 
-	elif re.search(".*confirmed.*",command):
-		x = covid.get_total_confirmed_cases()
-		talk_to_me(f"The  number of confirmed covid-19 cases are {x} ")	
+		command = command.split(" ")
+		if command[-1] == "world":
 
-	elif re.search(".*recovered|recoveries.*",command):
-		x = covid.get_total_recovered()
-		talk_to_me(f"The  number of recovered covid-19 cases  are {x} ")
+	 		x = covid.get_total_active_cases()
+		else:
 
-	elif re.search(".*deaths.*",command):
-		x = covid.get_total_deaths()
-		talk_to_me(f"The  number of deaths due to  covid-19 are {x} ")
+	 		x = covid.get_status_by_country_name(command[-1])
+	 		x = x[type_c[0]]
 
+		if type_c[0] == "deaths":
+			talk_to_me(f"The  number of {type_c[0]} due to covid 19  in {command[-1]} are {x} ")
+		else:
+			talk_to_me(f"The  number of {type_c[0]} covid-19 cases in {command[-1]} are {x} ")
+
+	
 	else:	
 				driver = webdriver.Chrome()
 				driver.get("https://www.google.com/search?q="+ command)	
@@ -117,7 +165,6 @@ while(True):
 	assistant(get_audio())
 
 			
-
 
 
 
