@@ -1,6 +1,8 @@
 # VOICE_ASSISTANT
 
-#### This is "Pepper" a Voice-assistant built using Python Programming Language.
+![Banner-image-3](https://user-images.githubusercontent.com/56406787/87941367-afc5f200-cab8-11ea-8e1e-80ee6545601e.jpg)
+
+### This is "Pepper" a Voice-assistant built using Python Programming Language.
 It has skills like:
 1. Gives information about covid19 status of any country.
 2. Narrates wikipedia article summary.
