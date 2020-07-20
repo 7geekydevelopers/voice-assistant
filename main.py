@@ -63,26 +63,17 @@ def assistant(command):
 	        talk_to_me(f"The time is {strTime}")
 
 
-	#elif 'wikipedia' in command:                                    #12345678
-	elif re.search("tell me about|i want to know about",command):        
-	        #command = command.replace("wikipedia", "")
-	        #command = command.split(" ")[-1]
-	        print("inside")
-	        command = re.findall("tell me about|i want to know about ([a-zA-Z0-9])",command)
-	        #print(command)
-	        if len(command) > 1:
-	        	command = " ".join(command)
-	        #	print(command)
+	elif 'wikipedia' in command:                                # command syntax : wikipedia <topic name>  
+	        command = command.replace("wikipedia", "")
 	        results = wikipedia.summary(command, sentences=2)
 	        talk_to_me("According to Wikipedia" + results)
-	        #print(results)
-	        #talk_to_me(results)
+	
 	      
 	elif 'joke' in command:
 	        talk_to_me(pyjokes.get_joke())
 	        
 	        
-	elif "where is" in command:                                  #12345678
+	elif "where is" in command:                                  #command syntax : where is <location>
 	    command=command.replace("where is","")
 	    location = command
 	    talk_to_me("User asked to Locate"+location)
