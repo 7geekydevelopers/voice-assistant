@@ -91,18 +91,19 @@ def assistant(command):
 	    
 	    
 	    
-	elif 'wiki' in command:
-	    talk_to_me(wikiquotes.random_quote("gandhi", "english"))
+	elif 'qoute from ' in command:                   #command syntax : quote from <name of a famous person >
+		command = command.replace("qoute from","")
+	    talk_to_me(wikiquotes.random_quote(command, "english"))
 	    
 	elif 'news' in command:
 	    webbrowser.open("https://news.google.com/topstories?hl=en-IN&gl=IN&ceid=IN:en")
 	    
-	elif "country" in command:
+	elif "country" in command:                      #command syntax : country <country name> 
 	    command=command.split(" ")
 	    name=CountryInfo(command[1])
 	    talk_to_me(name.capital())                	
 
-	elif("open website" in command):
+	elif("open website" in command):                 #command syntax : open website <website name>
 		command = command.split(" ")
 		webbrowser.open(url.format(command[2]))
 		
