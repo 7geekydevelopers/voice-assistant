@@ -82,9 +82,9 @@ def assistant(command):
 	    
 	    
 	    
-	elif 'qoute from ' in command:                   #command syntax : quote from <name of a famous person >
-		command = command.replace("qoute from","")
-	    talk_to_me(wikiquotes.random_quote(command, "english"))
+	elif 'quote from ' in command:                   #command syntax : quote from <name of a famous person >
+		command = command.replace("quote from","")
+		talk_to_me(wikiquotes.random_quote(command, "english"))
 	    
 	elif 'news' in command:
 	    webbrowser.open("https://news.google.com/topstories?hl=en-IN&gl=IN&ceid=IN:en")
