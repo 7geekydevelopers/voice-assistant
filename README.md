@@ -1,4 +1,4 @@
-# VOICE_ASSISTANT
+# VOICE-ASSISTANT
 
 ![Banner-image-3](https://user-images.githubusercontent.com/56406787/87941367-afc5f200-cab8-11ea-8e1e-80ee6545601e.jpg)
 
