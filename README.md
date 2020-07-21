@@ -10,7 +10,7 @@ It has skills like:
 4. Tells you a joke.
 5. Opens applications like Sublime text editor,notepad. 
 5. Redirects you to the Google news page for latest news.
-6. Cracks a funny and techy joke when asked to.
+6. Can Take notes from user and store them in notepad
 7. Correctly answers the capital of any country.
 8. Narrates a  quote of any famous personality. 
 9. If your search query isnt satisfied by any of the features from our code then the VA redirect the same query to Google.
