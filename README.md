@@ -13,6 +13,6 @@ It has skills like:
 6. Can Take notes from user and store them in notepad
 7. Correctly answers the capital of any country.
 8. Narrates a  quote of any famous personality. 
-9. If your search query isnt satisfied by any of the features from our code then the VA redirect the same query to Google.
+9. If your search query isn't satisfied by any of the features from our code then the VA redirect the same query to Google.
 10. Opens any Website. 
  
