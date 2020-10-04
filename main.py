@@ -125,23 +125,7 @@ def assistant(command):
 
 
 
-	elif re.search(".*active|recovered|deaths|confirmed.*",command):
-		type_c = re.findall(".*(active|recovered|deaths|confirmed).*",command)
-
-		command = command.split(" ")
-		if command[-1] == "world":
-
-	 		x = covid.get_total_active_cases()
-		else:
-
-	 		x = covid.get_status_by_country_name(command[-1])
-	 		x = x[type_c[0]]
-
-		if type_c[0] == "deaths":
-			talk_to_me(f"The  number of {type_c[0]} due to covid 19  in {command[-1]} are {x} ")
-		else:
-			talk_to_me(f"The  number of {type_c[0]} covid-19 cases in {command[-1]} are {x} ")
-
+	
 	
 	else:	
 				driver = webdriver.Chrome()
